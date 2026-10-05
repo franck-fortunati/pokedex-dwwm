@@ -1,0 +1,6 @@
+    --poke-red: #ee1515;
+    --poke-red-dark: #c40d0d;
+    --poke-yellow: #ffcb05;
+    --poke-yellow-dark: #c7a008;
+    --poke-blue: #3d7dca;
+    --poke-blue-dark: #003a70;

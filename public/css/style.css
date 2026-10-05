@@ -1,0 +1,77 @@
+.brandBall {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #dc3545 45%, #212529 45%, #212529 55%, #ffffff 55%);
+  border: 2px solid #212529;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.brandBall::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  border: 2px solid #212529;
+  border-radius: 50%;
+}
+
+.bg-perso {
+    background-color: #ee1515;
+    border-bottom: 5px solid black;
+}
+
+.bg-perso-footer {
+    background-color: #ee1515;
+    border-top: 5px solid black;
+}
+
+.btn-red {
+    background-color: #ee1515;
+    color: #ffffff;
+}
+
+.btn-red:hover {
+    background-color: #c40d0d;
+    color: #ffffff;
+}
+
+.btn-outline-red {
+    border: 1px solid #ee1515;
+    color: #ee1515;
+}
+
+.btn-outline-red:hover {
+    background-color: #c40d0d;
+    color: #ffffff;
+}
+
+.cardPokemon {
+  transition: transform 0.5s ease;
+}
+
+.cardPokemon:hover {
+    cursor: pointer;
+    transform: scale(1.1); /* Zoom de 20% (1.2) ou plus selon vos goûts */
+}
+
+.text-link {
+  color: #ffffff;
+}
+
+.text-link:hover {
+  color: #ffffff;
+  text-decoration: underline #ffc107;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+
+

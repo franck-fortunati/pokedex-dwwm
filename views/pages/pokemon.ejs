@@ -1,0 +1,37 @@
+<section class="pokemonCard m-5">
+    <div class="mb-3">
+        <a href="javascript:history.back()" class="btn btn-secondary btn-sm">Retour</a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">#<%= pokemon.id %> <%= pokemon.name %></h2>
+                </div>
+                <img src="<%= pokemon.sprites.other['official-artwork'].front_default %>" alt="<%= pokemon.name %>" class="p-5 bg-light">
+                <div class="card-body">
+                    <% pokemon.types.forEach(typeInfo => { %>
+                        <span class="badge bg-danger text-uppercase me-1 p-2">
+                            <%= typeInfo.type.name %>
+                        </span>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm">
+            <ul class="list-group list-group-flush text-start">
+                <li class="list-group-item"><strong>Taille :</strong> <%= pokemon.height / 10 %> m</li>
+                <li class="list-group-item"><strong>Poids :</strong> <%= pokemon.weight / 10 %> kg</li>
+                <li class="list-group-item">
+                    <strong>Statistiques :</strong>
+                    <ul class="mt-2 mb-0">
+                        <% pokemon.stats.forEach(statInfo => { %>
+                            <li><%= statInfo.stat.name %> : <%= statInfo.base_stat %></li>
+                        <% }) %>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
