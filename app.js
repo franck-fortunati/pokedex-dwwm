@@ -77,10 +77,6 @@ app.get('/pokemon/:name', async (req, res) => {
     };
 });
 
-app.listen(PORT, () => {
-    console.log("Serveur démarré sur http://localhost:3000")
-});
-
 app.get('/generation/:id', async (req, res) => {
     try {
         const genId = req.params.id;
@@ -122,4 +118,8 @@ app.get('/generation/:id', async (req, res) => {
         console.error(err);
         res.status(404).send("Génération introuvable !");
     };
+});
+
+app.listen(PORT, () => {
+    console.log(`Serveur démarré sur http://localhost:${PORT}`)
 });
