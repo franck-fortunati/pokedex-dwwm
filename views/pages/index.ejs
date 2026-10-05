@@ -19,14 +19,24 @@
         <% }) %>
     </div>
     <div class="d-flex justify-content-center align-items-center my-5">
+        <% 
+            let baseUrl = '/?page=';
+
+            if (typeof genId !== 'undefined' && genId) {
+                baseUrl = '/generation/' + genId + '?page=';
+            }
+        %>
+
         <% if (currentPage > 1) { %>
-            <a href="/?page=<%= currentPage - 1 %>" class="btn btn-red">Page précédente</a>
+            <a href="<%= baseUrl %><%= currentPage - 1 %>" class="btn btn-red">Page précédente</a>
         <% } else { %>
-            <div></div> <!-- Élément vide pour garder le bouton Suivant à droite -->
+            <div></div>
         <% } %>
 
         <span class="fw-bold mx-5"><%= currentPage %></span>
 
-        <a href="/?page=<%= currentPage + 1 %>" class="btn btn-red">Page suivante</a>
+        <% if (typeof totalPages !== 'undefined' ? currentPage < totalPages : true) { %>
+            <a href="<%= baseUrl %><%= currentPage + 1 %>" class="btn btn-red">Page suivante</a>
+        <% } %>
     </div>
 </section>

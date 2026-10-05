@@ -80,12 +80,27 @@ app.get('/pokemon/:name', async (req, res) => {
 app.get('/generation/:id', async (req, res) => {
     try {
         const genId = req.params.id;
+        const page = parseInt(req.query.page) || 1;
+        const limit = 20
         
         const response = await fetch(`${API_URL}/generation/${genId}`);
         if (!response.ok) throw new Error("Génération non trouvée");
         const genData = await response.json();
 
-        const pokemonResults = await Promise.all(genData.pokemon_species.map(async (pokemon) => {
+        const sortedSpecies = genData.pokemon_species.map((species) => {
+            const parts = species.url.split('/').filter(Boolean);
+            const id = parseInt(parts[parts.length - 1]);
+            return {name: species.name, id}
+        }).sort((a, b) => {
+            return a.id - b.id
+        });
+
+        const totalPokemons = sortedSpecies.length;
+        const totalPages = Math.ceil(totalPokemons / limit);
+        const startIndex = (page - 1) * limit;
+        const pageSpecies = sortedSpecies.slice(startIndex, startIndex + limit);
+
+        const pokemonResults = await Promise.all(pageSpecies.map(async (pokemon) => {
             try {
                 const resPokemon = await fetch(`${API_URL}/pokemon/${pokemon.name}`);
                 if (!resPokemon.ok) return null;
@@ -104,15 +119,13 @@ app.get('/generation/:id', async (req, res) => {
 
         const pokemons = pokemonResults.filter(p => p !== null);
 
-        pokemons.sort((a, b) => {
-            return a.id - b.id
-        });
-
         res.render('layout', {
             title: `Génération ${genId}`,
             page: 'pages/index',
             pokemons: pokemons,
-            currentPage: null
+            currentPage: page,
+            totalPages: totalPages,
+            genId: genId
         });
     } catch (err) {
         console.error(err);
